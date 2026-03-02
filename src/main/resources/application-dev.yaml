@@ -1,0 +1,6 @@
+logging:
+    level:
+        root: INFO
+        tz.go.mnrt.asert: DEBUG
+    file:
+        name: logs/application.log

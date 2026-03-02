@@ -1,0 +1,19 @@
+{
+    "properties": [
+        {
+            "name": "environment",
+            "type": "java.lang.String",
+            "description": "A description for 'environment'"
+        },
+        {
+            "name": "server.servlet.timeout",
+            "type": "java.lang.String",
+            "description": "A description for 'server.servlet.timeout'"
+        },
+        {
+            "name": "spring.devtools.restart.strategy",
+            "type": "java.lang.String",
+            "description": "A description for 'spring.devtools.restart.strategy'"
+        }
+    ]
+}

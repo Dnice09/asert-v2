@@ -1,0 +1,6 @@
+logging:
+    level:
+        root: ERROR
+        tz.go.mnrt.asert: ERROR
+    file:
+        name: logs/application-prod.log

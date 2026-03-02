@@ -1,0 +1,49 @@
+package tz.go.mnrt.asert.modules.core.rest.response;
+
+import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+
+@ControllerAdvice
+public class CustomApiResponseAdvice implements ResponseBodyAdvice<CustomApiResponse> {
+
+    @Override
+    public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
+        return CustomApiResponse.class.isAssignableFrom(returnType.getParameterType());
+    }
+
+    @Override
+    public CustomApiResponse beforeBodyWrite(
+            CustomApiResponse body,
+            MethodParameter returnType,
+            MediaType selectedContentType,
+            Class<? extends HttpMessageConverter<?>> selectedConverterType,
+            ServerHttpRequest request,
+            ServerHttpResponse response) {
+        if (body != null && body.getStatus() != null) {
+            response.setStatusCode(HttpStatus.valueOf(body.getStatus()));
+
+            if (body.getStatus() == HttpStatus.CREATED.value() && body.getData() != null) {
+                try {
+                    Object data = body.getData();
+                    java.lang.reflect.Method getUuidMethod = data.getClass().getMethod("getUuid");
+                    Object uuid = getUuidMethod.invoke(data);
+                    if (uuid != null) {
+                        String path = request.getURI().getPath();
+                        String location = path + "/" + uuid.toString();
+                        response.getHeaders().add("Location", location);
+                    }
+                } catch (NoSuchMethodException | IllegalAccessException
+                        | java.lang.reflect.InvocationTargetException e) {
+                    System.err.println("Failed to set Location header: " + e.getMessage());
+                }
+            }
+        }
+        return body;
+    }
+}

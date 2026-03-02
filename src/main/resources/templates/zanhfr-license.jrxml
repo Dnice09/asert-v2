@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="zanhfr-license" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63d61889-1c55-455e-a3ed-cfa3908c60ec">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="dXNlcnMgLDE1LDE1LDM3MzQ3Nzk4LTlhOTQtNGI5ZS1iZmMyLWU1Njk0NzJmMDVkMjs="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ASERT"/>
+	<parameter name="advisoryBoard" class="java.lang.String"/>
+	<parameter name="permitNumber" class="java.lang.String"/>
+	<parameter name="owner" class="java.lang.String"/>
+	<parameter name="facilityName" class="java.lang.String"/>
+	<parameter name="registrationDate" class="java.lang.String"/>
+	<parameter name="registrationNumber" class="java.lang.String"/>
+	<parameter name="facilityType" class="java.lang.String"/>
+	<parameter name="services" class="java.lang.String"/>
+	<parameter name="validFrom" class="java.lang.String"/>
+	<parameter name="validTo" class="java.lang.String"/>
+	<parameter name="licenseQrCode" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT id
+FROM users
+WHERE
+	 users.id = 1]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="802" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="2" width="554" height="1" uuid="cf53a7a4-2ef6-4b16-889a-a8665933b5df">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="4.0" lineColor="#109B26"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-1" y="785" width="554" height="1" uuid="ca964fa5-fc36-4c32-a9f9-3a529b0b04f8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="4.0" lineColor="#109B26"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="1" width="1" height="785" uuid="2197c258-a1e4-40c6-987b-7cc2b9d24a89"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineColor="#109B26"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="552" y="2" width="1" height="785" uuid="a8557540-7633-4f42-a6d3-4cb3b79d07ad"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineColor="#109B26"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="1" y="36" width="551" height="30" forecolor="#15377A" uuid="6c10a94e-b3e9-412d-9aa0-03670bcf7a7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REVOLUTIONARY GOVERNMENT OF ZANZIBAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="66" width="551" height="30" forecolor="#15377A" uuid="8f5359ee-e294-47d1-b97a-54687d0d1eaa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MINISTRY OF HEALTH]]></text>
+			</staticText>
+			<image>
+				<reportElement x="226" y="115" width="100" height="100" uuid="38617838-424c-40d5-bc50-3ef7f07ef658">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{advisoryBoard}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="1" y="215" width="552" height="30" forecolor="#4A4545" uuid="e1d210fe-4d62-4d4e-8e55-83e8e43dfb8b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[CONCATENATE("Permit No.: ",$P{permitNumber})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="253" width="550" height="30" forecolor="#4A4545" uuid="76218da8-3df2-42ab-bfa7-5803b38b004e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRIVATE HOSPITAL ADVISORY BOARD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="285" width="550" height="18" forecolor="#4A4545" uuid="7538d51a-1534-40a8-ad11-272d65f61431"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tel: +255-24-2231074]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="304" width="550" height="20" forecolor="#4A4545" uuid="d92834c9-d804-4d97-a098-ffb0a519604e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[P.O BOX 236 - ZANZIBAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="325" width="549" height="20" forecolor="#4A4545" uuid="3952facc-ee2a-49ea-af75-517395f8e01e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PERMIT TO OPERATE PRIVATE HOSPITAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="345" width="550" height="20" forecolor="#4A4545" uuid="57563204-0cbb-4156-81ce-980ea4c230b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Made under section 7(1) of the Private Hospital (Regulation) Act No. 4 of 1994]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="382" width="550" height="30" forecolor="#4A4545" uuid="399cd5d5-fef6-4122-89de-eb7e9368da75"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[This is to certify that]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="412" width="550" height="30" forecolor="#4A4545" uuid="d1170033-1fb0-4aef-b29c-a00a61d848ca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{owner}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="442" width="131" height="30" forecolor="#4A4545" uuid="cbdd2bad-ecb4-4220-ad13-62bcd32d897d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Owner of ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="442" width="383" height="30" forecolor="#4A4545" uuid="54ae79b6-934c-4487-b525-5f68268204fd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{facilityName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="472" width="131" height="30" forecolor="#4A4545" uuid="3a00991f-80ea-488c-83b0-042b3d8a6fff"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Registered on ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="472" width="150" height="30" forecolor="#4A4545" uuid="a90f2cf5-42d6-45d9-900a-af9d8b8de906"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{registrationDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="312" y="472" width="70" height="30" forecolor="#4A4545" uuid="3f6594cd-9ce9-4396-a70b-fc6d225ce950"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[with Reg. No.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="382" y="472" width="161" height="30" forecolor="#4A4545" uuid="b8d84050-3f87-4481-a2c4-e0164a1322c6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{registrationNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="502" width="524" height="32" forecolor="#4A4545" uuid="111bce0d-0af8-406f-a6d5-21fc63ffabc6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[CONCATENATE("Is granted a permit to operate a ",$P{facilityType}," with the following services:")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="534" width="410" height="106" forecolor="#4A4545" uuid="bd04d214-5034-406e-827d-b0dd46adbde7"/>
+				<box padding="3"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{services}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="5">
+				<reportElement x="19" y="640" width="524" height="81" uuid="965cd247-61b6-4e11-a48b-70e03ef6689c"/>
+				<graphicElement>
+					<pen lineStyle="Dashed" lineColor="#4A4545"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="19" y="641" width="524" height="20" forecolor="#4A4545" uuid="f35c9d58-d138-4cc6-a9ca-34076c2c827e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONDITIONS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="241" y="657" width="80" height="1" uuid="c0f7a8b8-776b-4a8c-afe5-3b9efe5f1edd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="20" y="661" width="522" height="58" uuid="eb3e34d6-67a5-4b9d-9775-ebf50ca77dbb"/>
+				<box padding="3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[1. This. permit is not transferable without written approval.
+2. This permit will be published again after every one year.
+3. This permit will not allow practising Dangerous practices.
+4. This permit does not authorize the holder to practice during the period of suspension, revocation and cancellation of Registration]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="721" width="522" height="30" forecolor="#4A4545" uuid="b80d7d76-048f-4536-ae94-dcd4b3cedd4d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[CONCATENATE("This permit is valid from ",$P{validFrom}," to ",$P{validTo})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="237" y="753" width="100" height="1" uuid="44f8318a-8165-4494-95e6-9e967f2409b8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="19" y="758" width="523" height="14" forecolor="#4A4545" uuid="4c7d8466-c6fd-4093-9e85-ab01fabc0c3f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Registrar of Private Hospital Advisory Board]]></text>
+			</staticText>
+			<image>
+				<reportElement x="442" y="534" width="100" height="100" uuid="d896c01f-86fe-4ae7-8464-dcc3c53c7330">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{licenseQrCode}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

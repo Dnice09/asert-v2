@@ -1,0 +1,2 @@
+ALTER TABLE api_keys
+ADD COLUMN is_retired BOOLEAN DEFAULT FALSE;

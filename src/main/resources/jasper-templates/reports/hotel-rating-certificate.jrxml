@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="hotel-rating-certificate"
+              pageWidth="595" pageHeight="842"
+              columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
+              whenNoDataType="AllSectionsNoDetail"
+              uuid="f3f969f5-b4cd-48ee-bd90-8c8b45138fd5">
+
+    <style name="WatermarkStyle" forecolor="#E8E8E8" fontName="DejaVu Sans" fontSize="10" isBold="true"/>
+
+    <parameter name="eacLogo" class="java.lang.String"/>
+    <parameter name="coatOfArms" class="java.lang.String"/>
+    <parameter name="permanentSecretarySignature" class="java.lang.String"/>
+    <parameter name="issuingAuthoritySignature" class="java.lang.String"/>
+    <parameter name="facilityName" class="java.lang.String"/>
+    <parameter name="grade" class="java.lang.String"/>
+    <parameter name="stars" class="java.lang.String"/>
+    <parameter name="SerialNo" class="java.lang.String"/>
+    <parameter name="issue_date" class="java.util.Date"/>
+
+    <queryString><![CDATA[SELECT 1 as dummy]]></queryString>
+
+    <background>
+        <band height="802" splitType="Stretch">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="802" uuid="e622998a-7832-4d24-8736-258673a56214"/>
+                <graphicElement>
+                    <pen lineWidth="3.0" lineColor="#003366"/>
+                </graphicElement>
+            </rectangle>
+
+            <textField textAdjust="StretchHeight">
+                <reportElement x="10" y="10" width="535" height="782" style="WatermarkStyle" uuid="8a6d2c4e-6b8a-4c9e-9d3f-5b6c7d8e9f0a"/>
+                <textElement textAlignment="Justified" markup="none"/>
+                <textFieldExpression><![CDATA[new String(new char[250]).replace("\0", "EAST AFRICAN COMMUNITY  EAST AFRICAN COMMUNITY  ")]]></textFieldExpression>
+            </textField>
+
+            <rectangle><reportElement x="0" y="785" width="555" height="4" backcolor="#000000" uuid="07921a22-3c8c-443e-b873-16a761e01477"/><graphicElement><pen lineWidth="0.0"/></graphicElement></rectangle>
+            <rectangle><reportElement x="0" y="789" width="555" height="4" backcolor="#FFFF00" uuid="98236214-4171-419b-a321-124151241241"/><graphicElement><pen lineWidth="0.0"/></graphicElement></rectangle>
+            <rectangle><reportElement x="0" y="793" width="555" height="4" backcolor="#0000FF" uuid="12415124-1241-1241-1241-124124124124"/><graphicElement><pen lineWidth="0.0"/></graphicElement></rectangle>
+        </band>
+    </background>
+
+    <title>
+        <band height="250" splitType="Stretch">
+            <image hAlign="Left" vAlign="Top">
+                <reportElement x="20" y="30" width="90" height="90" uuid="d1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d"/>
+                <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($P{eacLogo}.substring(22))))]]></imageExpression>
+            </image>
+            <image hAlign="Right" vAlign="Top">
+                <reportElement x="445" y="30" width="90" height="90" uuid="a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5e"/>
+                <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($P{coatOfArms}.substring(22))))]]></imageExpression>
+            </image>
+
+            <staticText>
+                <reportElement x="0" y="130" width="555" height="30" uuid="b1c2d3e4-f5a6-4b7c-8d9e-0f1a2b3c4d5e"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[MINISTRY OF NATURAL RESOURCES AND TOURISM]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="0" y="170" width="555" height="50" uuid="c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Serif" size="36" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Certificate of Classification]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <detail>
+        <band height="360" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="20" width="555" height="30" uuid="d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a"/>
+                <textElement textAlignment="Center" verticalAlignment="Bottom">
+                    <font fontName="Serif" size="22" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[This is to certify that]]></text>
+            </staticText>
+
+            <textField textAdjust="StretchHeight">
+                <reportElement x="30" y="60" width="495" height="80" forecolor="#003399" uuid="e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Serif" size="28" isBold="true" isUnderline="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{facilityName}.toUpperCase()]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="0" y="170" width="555" height="30" uuid="f1a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b5c"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Serif" size="20" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Has been classified as]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="0" y="210" width="555" height="40" uuid="a2b3c4d5-e6f7-4a8b-9c0d-1e2f3a4b5c6d"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="26" isBold="true" isUnderline="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{grade}.toUpperCase()]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="240" width="555" height="80" forecolor="#FFCC00" uuid="b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e"/>
+                <textElement textAlignment="Center" verticalAlignment="Top">
+                    <font fontName="DejaVu Sans" size="64" pdfFontName="DejaVuSans.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{stars}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="160" splitType="Stretch">
+            <!-- Left side: Permanent Secretary signature section -->
+            <image hAlign="Center" vAlign="Bottom" scaleImage="RetainShape">
+                <reportElement x="50" y="-85" width="160" height="160" uuid="1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"/>
+                <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($P{permanentSecretarySignature}.substring(22))))]]></imageExpression>
+            </image>
+            <line>
+                <reportElement x="40" y="30" width="150" height="1" uuid="a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d"/>
+            </line>
+            <staticText>
+                <reportElement x="40" y="35" width="150" height="30" uuid="b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e"/>
+                <textElement textAlignment="Center" verticalAlignment="Top">
+                    <font fontName="DejaVu Sans" size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Permanent Secretary]]></text>
+            </staticText>
+
+            <!-- Center: Green stamp/seal placeholder -->
+            <ellipse>
+                <reportElement x="235" y="10" width="85" height="85" forecolor="#FFFFFF" backcolor="#00B050" uuid="c3d4e5f6-a7b8-9c0d-1e2f-3a4b5c6d7e8f"/>
+                <graphicElement>
+                    <pen lineWidth="2.0" lineColor="#00B050"/>
+                </graphicElement>
+            </ellipse>
+
+            <!-- Right side: Issuing Authority signature section -->
+            <image hAlign="Center" vAlign="Bottom" scaleImage="RetainShape">
+                <reportElement x="375" y="-55" width="120" height="120" uuid="9f8e7d6c-5b4a-3c2d-1e0f-9a8b7c6d5e4f"/>
+                <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($P{issuingAuthoritySignature}.substring(22))))]]></imageExpression>
+            </image>
+            <line>
+                <reportElement x="365" y="30" width="150" height="1" uuid="d4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f9a"/>
+            </line>
+            <staticText>
+                <reportElement x="365" y="35" width="150" height="30" uuid="e5f6a7b8-c9d0-1e2f-3a4b-5c6d7e8f9a0b"/>
+                <textElement textAlignment="Center" verticalAlignment="Top">
+                    <font fontName="DejaVu Sans" size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Issuing Authority]]></text>
+            </staticText>
+
+            <!-- Bottom left: Serial Number -->
+            <textField>
+                <reportElement x="40" y="110" width="150" height="15" uuid="f6a7b8c9-d0e1-2f3a-4b5c-6d7e8f9a0b1c"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{SerialNo}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="40" y="95" width="150" height="15" uuid="a7b8c9d0-e1f2-3a4b-5c6d-7e8f9a0b1c2d"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Serial No]]></text>
+            </staticText>
+
+            <!-- Bottom center: Terms and conditions -->
+            <staticText>
+                <reportElement x="200" y="110" width="155" height="15" uuid="b8c9d0e1-f2a3-4b5c-6d7e-8f9a0b1c2d3e"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Terms and conditions apply]]></text>
+            </staticText>
+
+            <!-- Bottom right: Date -->
+            <textField pattern="dd/MM/yyyy">
+                <reportElement x="365" y="110" width="150" height="15" uuid="c9d0e1f2-a3b4-5c6d-7e8f-9a0b1c2d3e4f"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="9" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{issue_date}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="365" y="95" width="150" height="15" uuid="d0e1f2a3-b4c5-6d7e-8f9a-0b1c2d3e4f5a"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="8" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Date]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+</jasperReport>

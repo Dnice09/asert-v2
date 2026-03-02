@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="zanhfr-reg-certificate" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c74e7a9-b759-488b-bcc7-2e89c4518cc5">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ASERT"/>
+	<parameter name="zanzibar" class="java.lang.String"/>
+	<parameter name="advisoryBoard" class="java.lang.String"/>
+	<parameter name="facilityType" class="java.lang.String"/>
+	<parameter name="facilityName" class="java.lang.String"/>
+	<parameter name="registrationNumber" class="java.lang.String"/>
+	<parameter name="location" class="java.lang.String"/>
+	<parameter name="owner" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="issueDate" class="java.lang.String"/>
+	<parameter name="registrarSignature" class="java.lang.String"/>
+	<parameter name="chairmanSignature" class="java.lang.String"/>
+	<parameter name="qrCode" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select id from users where id = 1;]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="802" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="1" width="1" height="800" uuid="661ca15e-5331-438e-9e6d-4b0552ed84c0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="4.0" lineColor="#FFD700"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="552" y="2" width="1" height="800" uuid="b9a9dee2-aa40-4893-b8e2-19ce904cf1fc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="4.0" lineColor="#FFD700"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="2" width="554" height="1" uuid="ab05fd4f-0578-4c9c-8764-46f52c731754">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="4.0" lineColor="#FFD700"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-1" y="800" width="554" height="1" uuid="2871eb88-fec7-4189-8a09-2fcc4494cf42">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="4.0" lineColor="#FFD700"/>
+				</graphicElement>
+			</line>
+			<image>
+				<reportElement x="6" y="35" width="100" height="100" uuid="3098cebf-7ad3-4bcb-8b48-d52256c6d1da">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{zanzibar}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="110" y="36" width="330" height="44" forecolor="#4A4545" uuid="441c8316-b89a-44bf-be31-f91eb224ff54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REVOLUTIONARY GOVERNMENT OF ZANZIBAR]]></text>
+			</staticText>
+			<image>
+				<reportElement x="445" y="36" width="100" height="100" uuid="35cd75d4-c344-4672-a37c-d1d5ad9a8060">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{advisoryBoard}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="110" y="80" width="330" height="44" forecolor="#4A4545" uuid="fc45ee4f-b324-4869-9120-90bbef917ac4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MINISTRY OF HEALTH]]></text>
+			</staticText>
+			<line>
+				<reportElement x="4" y="143" width="545" height="1" uuid="fe703189-cde8-4d47-bf1c-6af61ffa35e4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Solid" lineColor="#FFD700"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="20" y="159" width="218" height="22" forecolor="#4A4545" uuid="0882bd43-4c87-4394-a026-ff48ea660964"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Tel: +255-54-31074]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="181" width="218" height="28" forecolor="#4A4545" uuid="4a2280c9-3b6a-40d4-959b-e4cffac8b2c1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Email: phap@mohz.go.tz]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="159" width="262" height="50" forecolor="#4A4545" uuid="76b698d6-ecee-4b3d-9d00-1c9c5f1a0fce"/>
+				<textElement textAlignment="Right">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Private Hospital Advisory Board of Zanzibar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="210" width="510" height="50" forecolor="#4A4545" uuid="cee01a6b-c01c-425c-9c1b-d0bf516e0135"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CERTIFICATE OF REGISTRATION
+[Made under regulation 19]]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="261" width="510" height="110" forecolor="#4A4545" uuid="829d3b47-98b1-4af9-ab40-bc62b429d778"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="14"/>
+					<paragraph lineSpacingSize="1.25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[CONCATENATE("I hereby certify that this ",$P{facilityType}," named ",$P{facilityName}," has been registered with registration number: ",$P{registrationNumber}," by Private Hospital Advisory Board Zanzibar")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="373" width="106" height="28" forecolor="#4A4545" uuid="b44e38e2-579f-4ac4-88b3-cf99c27187b2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Situated at:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="373" width="398" height="28" forecolor="#4A4545" uuid="2d865cd2-5b38-46aa-aec7-526490d58b50"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{location}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="401" width="106" height="28" forecolor="#4A4545" uuid="27a47b35-71e9-4335-9343-7df817da156d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Owned by:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="401" width="398" height="28" forecolor="#4A4545" uuid="22f081fb-56fc-45f9-af37-05f3780485a6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{owner}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="429" width="106" height="28" forecolor="#4A4545" uuid="fd8a958c-bd77-478d-97ee-b54e9d507e67"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Address:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="429" width="398" height="28" forecolor="#4A4545" uuid="a7008712-0e4a-4354-b8c1-6a2e89eb6e6d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="457" width="106" height="28" forecolor="#4A4545" uuid="9d7be212-67c5-42b9-8c88-201059dafeb4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Issue Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="457" width="398" height="28" forecolor="#4A4545" uuid="c703e047-3ffd-4b6d-9b60-77dc3a3f8423"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{issueDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="493" width="508" height="40" forecolor="#4A4545" uuid="6d580423-f8de-4c30-b79f-6ad81b136c95"/>
+				<textElement textAlignment="Center">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Has Been Registered under the
+Private Hospital (Regulation) Act, No.4 of 1994]]></text>
+			</staticText>
+			<image>
+				<reportElement x="20" y="550" width="204" height="50" uuid="bc9458f3-3d47-426c-bc91-6bdfd3834b90">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{chairmanSignature}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="325" y="555" width="204" height="50" uuid="30965f45-98a6-4b74-bfa1-355fff04f6d3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{registrarSignature}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="20" y="612" width="204" height="30" forecolor="#4A4545" uuid="56e2a063-9c0f-4131-9545-ca8c67d8e0b9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chairman of the Board]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="612" width="204" height="30" forecolor="#4A4545" uuid="808aea5f-8c1e-4853-9545-c595a82f674a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registrar]]></text>
+			</staticText>
+			<image>
+				<reportElement x="409" y="650" width="120" height="120" uuid="57714aa7-ad10-4c1c-b69d-2788ec3099a0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{qrCode}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

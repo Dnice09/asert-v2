@@ -1,0 +1,645 @@
+buildscript {
+    dependencies {
+        classpath 'org.atteo:evo-inflector:1.2.2'
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.7.18'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'java'
+    id 'org.flywaydb.flyway' version '9.22.0'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2021.0.9"
+    }
+}
+
+def dotEnv = new Properties()
+
+if (rootProject.file(".env").exists()) {
+    dotEnv.load(new FileInputStream(rootProject.file(".env")))
+}
+
+flyway {
+    url = dotEnv['FLYWAY_URL']
+    user = dotEnv['FLYWAY_USER']
+    password = dotEnv['FLYWAY_PASSWORD']
+    schemas = ['public']
+}
+
+group = 'tz.go.mnrt.asert'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+bootJar {
+    mainClass = 'tz.go.mnrt.asert.App'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+def githubProperties = new Properties()
+if (rootProject.file("github.properties").exists()) {
+    githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/zechtz/gepg-java")
+        credentials {
+            username = githubProperties['gpr.usr'] ?: System.getenv("GITHUB_ACTOR") ?: dotEnv['GITHUB_ACTOR']
+            password = githubProperties['gpr.key'] ?: System.getenv("GITHUB_TOKEN") ?: dotEnv['GITHUB_TOKEN']
+        }
+    }
+}
+
+dependencies {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.7.3'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'com.google.zxing:core:3.5.1'
+    implementation 'com.google.zxing:javase:3.5.1'
+    implementation 'net.sf.barcode4j:barcode4j:2.1'
+    implementation 'org.apache.xmlgraphics:batik-bridge:1.16'
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
+    implementation 'io.github.cdimascio:dotenv-java:2.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'com.vladmihalcea:hibernate-types-52:2.21.1'
+    implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.2.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation group: 'org.json', name: 'json', version: '20220924'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.locationtech.jts:jts-core:1.16.1'
+    implementation 'org.hibernate:hibernate-spatial:5.6.1.Final'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.11'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.7.5'
+    implementation 'org.flywaydb:flyway-core'
+    implementation group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
+    implementation group: 'net.sf.jasperreports', name: 'jasperreports', version: '6.21.0'
+    implementation group: 'net.sf.jasperreports', name: 'jasperreports-fonts', version: '6.21.0'
+    implementation group: 'net.sf.jasperreports', name: 'jasperreports-functions', version: '6.21.0'
+    implementation group: 'com.github.librepdf', name: 'openpdf', version: '1.3.39'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.postgresql:postgresql'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'pl.allegro.finance:tradukisto:1.12.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.0'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.0'
+    implementation 'com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations:2.15.0'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2'
+    implementation 'com.vladmihalcea:hibernate-types-52:2.21.1'
+    implementation 'org.aspectj:aspectjrt:1.9.6'
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.1'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:3.0.2'
+    implementation 'org.springframework.statemachine:spring-statemachine-core:3.2.0'
+    implementation group: 'com.google.zxing', name: 'core', version: '3.5.3'
+    implementation group: 'com.google.zxing', name: 'javase', version: '3.5.3'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.9'
+
+    implementation 'io.micrometer:micrometer-tracing-bridge-brave:1.0.8'
+    implementation 'io.zipkin.reporter2:zipkin-reporter-brave:2.16.3'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+task migrate {
+    description 'Creates an empty new file within the src/main/resources/db/migration directory into which developers can add new SQL migration code.'
+    doLast {
+        if (!project.hasProperty('n')) throw new Exception("-Pn is required")
+        def fileName = project.getProperty('n')
+        if (!fileName.matches("[a-zA-Z_]+")) throw new Exception("Invalid migration name, name should match [a-zA-Z_]+")
+        if (fileName.length() < 10) throw new Exception("migration name is required to not be less than 10")
+        def timestamp = new Date().format('yyyyMMddHHmmssSSS', TimeZone.getTimeZone('GMT'))
+        def fullFileName = "${timestamp}__${fileName}.sql"
+        def migrationFile = new File(sourceSets.main.resources.srcDirs.first(), 'db/migration/' + fullFileName)
+        migrationFile << "-- WHEN COMMITTING OR REVIEWING THIS FILE: Make sure that the timestamp in the file name (that serves as a version) is the latest timestamp, and that no new migration have been added in the meanwhile.\n"
+        migrationFile << "-- Adding migrations out of order may cause this migration to never execute or behave in an unexpected way.\n"
+        migrationFile << "-- Migrations should NOT BE EDITED. Add a new migration to apply changes."
+        migrationFile.createNewFile()
+    }
+}
+
+task generate {
+    description "Generate a scaffold of a module example: 'gradle -Pm=module-name [-Pp=parent-module-name] [-Pprops=name:String:required,email:String:unique:required,age:Integer,customer:ManyToOne:Customer:required]'"
+    doLast {
+        // Enhanced debugging to understand what's happening
+        println "m property exists? " + project.hasProperty('m')
+        println "m property value: " + (project.hasProperty('m') ? project.property('m') : "NOT FOUND")
+        println "props property exists? " + project.hasProperty('props')
+        println "props property value: " + (project.hasProperty('props') ? project.property('props') : "NOT FOUND")
+
+        // Check if module name is provided and not empty
+        def moduleNameRaw = project.hasProperty('m') ? project.property('m')?.toString() : null
+        def isValidModule = moduleNameRaw && moduleNameRaw.trim() != ""
+        // Only consider 'h' or 'help' if explicitly set by user (ignore Gradle's internal 'task :help')
+        def isHelpRequested = (project.hasProperty('h') && project.findProperty('h')?.toString()?.trim()) ||
+                             (project.hasProperty('help') && project.findProperty('help')?.toString()?.trim() && project.findProperty('help')?.toString() != "task ':help'")
+
+        // Debugging to confirm values
+        println "Module name raw: '${moduleNameRaw}'"
+        println "Is valid module? ${isValidModule}"
+        println "Is help requested? ${isHelpRequested}"
+        println "Has 'h' property? ${project.hasProperty('h')} (Value: ${project.findProperty('h') ?: 'none'})"
+        println "Has 'help' property? ${project.hasProperty('help')} (Value: ${project.findProperty('help') ?: 'none'})"
+
+        // Show help if explicitly requested or if module name is missing/invalid
+        if (isHelpRequested || !isValidModule) {
+            println """
+                ╔════════════════════════════════════════════════════════════════════╗
+                ║                    SCAFFOLD GENERATOR HELP                          ║
+                ╚════════════════════════════════════════════════════════════════════╝
+
+                USAGE:
+                ./gradlew generate -Pm=ModuleName [-Pp=ParentModule] [-Pprops=prop1:Type:constraints,prop2:Type...]
+
+                REQUIRED PARAMETERS:
+                -Pm=ModuleName     The name of the module to generate (CamelCase)
+                Example: -Pm=HotelGuest
+
+                OPTIONAL PARAMETERS:
+                -Pp=ParentModule   Parent module under which to create this module
+                Example: -Pp=hotel
+
+                -Pprops=...        Define entity properties in the format:
+                propertyName:Type[:TargetEntity]:constraint1:constraint2...
+
+                Supported types:
+                - String, Integer, Long, Double, Boolean
+                - LocalDate, LocalDateTime
+                - ManyToOne, OneToMany (requires TargetEntity)
+
+                Supported constraints:
+                - required: Adds NOT NULL in SQL and @NotNull validation
+                - unique: Creates a unique constraint in the database
+                - length=N: Sets maximum length for strings
+
+                Example:
+                -Pprops=name:String:required:length=100,email:String:required:unique,age:Integer,customer:ManyToOne:Customer:required
+
+                -Ph or --help      Show this help message
+
+                EXAMPLES:
+                # Create a basic User module
+                ./gradlew generate -Pm=User
+
+                # Create a HotelGuest module with a ManyToOne relationship
+                ./gradlew generate -Pm=HotelGuest -Pp=hotel -Pprops=name:String:required,customer:ManyToOne:Customer:required
+
+                # Create an Order module with relationships
+                ./gradlew generate -Pm=Order -Pprops=customer:ManyToOne:Customer:required,items:OneToMany:OrderItem,orderDate:LocalDate
+
+                ╔════════════════════════════════════════════════════════════════════╗
+                ║  Generated files will be created under:                             ║
+                ║  src/main/java/tz/go/mnrt/asert/modules/[parent/]moduleName/       ║
+                ╚════════════════════════════════════════════════════════════════════╝
+                """
+            return
+        }
+
+        println "Module parameter provided: " + project.property('m')
+
+        def getSqlType = { javaType ->
+            switch(javaType) {
+                case "String": return "VARCHAR(255)"
+                case "Integer": return "INTEGER"
+                case "Long": return "BIGINT"
+                case "Double": return "NUMERIC(19, 2)"
+                case "Boolean": return "BOOLEAN"
+                case "LocalDate": return "DATE"
+                case "LocalDateTime": return "TIMESTAMP WITHOUT TIME ZONE"
+                default: return "VARCHAR(255)"
+            }
+        }
+
+        def modulesDir = "${sourceSets.main.java.srcDirs.first()}/tz/go/mnrt/asert/modules"
+
+        def moduleName = moduleNameRaw.length() > 0 ? moduleNameRaw[0].toUpperCase() + (moduleNameRaw.length() > 1 ? moduleNameRaw[1..-1] : "") : ""
+
+        if (!moduleName.matches("[a-zA-Z][a-zA-Z0-9]+")) {
+            throw new Exception("Invalid module name '${moduleName}', name should match [a-zA-Z][a-zA-Z0-9]+")
+        }
+
+        def module = moduleName.toLowerCase()
+        def moduleNameVariable = moduleName.length() > 0 ? moduleName[0].toLowerCase() + (moduleName.length() > 1 ? moduleName[1..-1] : "") : ""
+        def moduleNamePlural = org.atteo.evo.inflector.English.plural(moduleName)
+        def moduleTableName = moduleNamePlural.replaceAll(/([a-z])([A-Z])/, '$1_$2').toLowerCase()
+        def moduleRouteName = moduleNamePlural.replaceAll(/([a-z])([A-Z])/, '$1-$2').toLowerCase()
+
+        def parentName = project.hasProperty('p') ? project.property('p').toString() : ""
+        def moduleDir = parentName ? "${parentName}/${module}" : "${module}"
+        def packageName = parentName ? "${parentName.replaceAll("/", ".")}.${module}" : "${module}"
+
+        def entityProperties = []
+        if (project.hasProperty('props') && project.property('props')) {
+            def propsStr = project.property('props').toString()
+            propsStr.split(',').each { propDef ->
+                def parts = propDef.split(':')
+                def propName = parts[0]
+                def propType = parts.size() > 1 ? parts[1] : "String"
+                def constraints = parts.size() > 2 ? parts[2..-1] : []
+                def targetEntity = null
+
+                if (["ManyToOne", "OneToMany"].contains(propType) && parts.size() > 2) {
+                    targetEntity = parts[2]
+                    constraints = parts.size() > 3 ? parts[3..-1] : []
+                }
+
+                entityProperties << [
+                    name: propName,
+                    type: propType,
+                    targetEntity: targetEntity,
+                    required: constraints.contains("required"),
+                    unique: constraints.contains("unique"),
+                    nullable: !constraints.contains("required"),
+                    length: constraints.find { it.startsWith("length=") }?.substring(7) ?: null
+                ]
+            }
+        }
+
+        File moduleDirectory = new File("${modulesDir}/${moduleDir}")
+        if (moduleDirectory.exists() && !moduleDirectory.isDirectory()) throw new Exception("Module dir is writable")
+
+        println "☢️  Generating Module ${moduleName}"
+
+        if (!moduleDirectory.exists() && !moduleDirectory.mkdirs()) throw new Exception("failed creating ${moduleDirectory.getAbsolutePath()}")
+
+        def dirs = ["dtos", "entity", "repository", "rest", "services"]
+        println "☢️  Generating ${dirs.toArray().join(",")}"
+
+        for (def cDir : dirs) {
+            File subDir = new File("${moduleDirectory.getAbsolutePath()}/${cDir}")
+            if (subDir.exists() && (!subDir.isDirectory() || subDir.list().size() > 0)) throw new Exception("${subDir.getAbsolutePath()} is not empty")
+            if (!subDir.exists() && !subDir.mkdirs()) throw new Exception("Failed creating ${subDir.getAbsolutePath()}")
+        }
+
+        def genFile = { templateName, fileDir, fileName ->
+            File template = new File("${rootDir}/tools/templates/${templateName}.java")
+            File outputFile = new File("${moduleDirectory.getAbsolutePath()}/${fileDir}/${moduleName}${fileName}.java")
+            if (!template.exists() || !template.isFile()) throw new Exception("Failed creating ${fileDir}/${moduleName}${fileName}.java, template not found ${template.getAbsolutePath()}")
+
+            if (templateName == "EntityTemplate") {
+                outputFile.withWriter { writer ->
+                    writer.writeLine("package tz.go.mnrt.asert.modules.${packageName}.entity;")
+                    writer.writeLine("")
+                    writer.writeLine("import javax.persistence.Column;")
+                    writer.writeLine("import javax.persistence.Entity;")
+                    writer.writeLine("import javax.persistence.Table;")
+                    writer.writeLine("import javax.persistence.ManyToOne;")
+                    writer.writeLine("import javax.persistence.OneToMany;")
+                    writer.writeLine("import javax.persistence.JoinColumn;")
+                    writer.writeLine("import java.util.List;")
+                    writer.writeLine("import lombok.AllArgsConstructor;")
+                    writer.writeLine("import lombok.Builder;")
+                    writer.writeLine("import lombok.Getter;")
+                    writer.writeLine("import lombok.NoArgsConstructor;")
+                    writer.writeLine("import lombok.Setter;")
+                    writer.writeLine("import tz.go.mnrt.asert.modules.core.entities.BaseModel;")
+
+                    entityProperties.findAll { it.targetEntity }.each { prop ->
+                        writer.writeLine("import tz.go.mnrt.asert.modules.${packageName}.entity.${prop.targetEntity};")
+                    }
+
+                    def hasDateType = entityProperties.any { it.type == "LocalDate" || it.type == "LocalDateTime" }
+                    if (hasDateType) {
+                        writer.writeLine("import java.time.LocalDate;")
+                        writer.writeLine("import java.time.LocalDateTime;")
+                    }
+
+                    writer.writeLine("")
+                    writer.writeLine("@Getter")
+                    writer.writeLine("@Setter")
+                    writer.writeLine("@Entity")
+                    writer.writeLine("@Builder")
+                    writer.writeLine("@NoArgsConstructor")
+                    writer.writeLine("@AllArgsConstructor")
+                    writer.writeLine("@Table(name = \"${moduleTableName}\")")
+                    writer.writeLine("public class ${moduleName} extends BaseModel {")
+
+                    entityProperties.each { prop ->
+                        writer.writeLine("")
+                        if (prop.type == "ManyToOne") {
+                            writer.writeLine("    @ManyToOne${prop.nullable ? '' : '(optional = false)'}" )
+                            writer.writeLine("    @JoinColumn(name = \"${prop.name.replaceAll(/([a-z])([A-Z])/, '$1_$2').toLowerCase()}_id\"${prop.nullable ? '' : ', nullable = false'})")
+                            writer.writeLine("    private ${prop.targetEntity} ${prop.name};")
+                        } else if (prop.type == "OneToMany") {
+                            writer.writeLine("    @OneToMany(mappedBy = \"${moduleNameVariable}\")")
+                            writer.writeLine("    private List<${prop.targetEntity}> ${prop.name};")
+                        } else {
+                            writer.write("    @Column(name = \"${prop.name.replaceAll(/([a-z])([A-Z])/, '$1_$2').toLowerCase()}\"")
+                            if (prop.nullable == false) writer.write(", nullable = false")
+                            if (prop.unique) writer.write(", unique = true")
+                            if (prop.length) writer.write(", length = ${prop.length}")
+                            writer.writeLine(")")
+                            writer.writeLine("    private ${prop.type} ${prop.name};")
+                        }
+                    }
+
+                    writer.writeLine("}")
+                }
+                return
+            }
+
+            outputFile.withWriter { writer ->
+                template.eachLine { line ->
+                    writer.writeLine(line
+                        .replaceAll("#package_name", packageName)
+                        .replaceAll("#module_name", moduleName)
+                        .replaceAll("#module_var", moduleNameVariable)
+                        .replaceAll("#module_route_name", moduleRouteName)
+                        .replaceAll("#module_table_name", moduleTableName)
+                        .replaceAll("#module_lowercase", module)
+                    )
+                }
+            }
+            outputFile.createNewFile()
+        }
+
+        def genDtoWithProps = { dtoType ->
+            File outputFile = new File("${moduleDirectory.getAbsolutePath()}/dtos/${moduleName}${dtoType}Dto.java")
+
+            if (dtoType == "Response") {
+                outputFile.withWriter { writer ->
+                    writer.writeLine("package tz.go.mnrt.asert.modules.${packageName}.dtos;")
+                    writer.writeLine("")
+                    writer.writeLine("import java.time.LocalDateTime;")
+                    writer.writeLine("import java.util.UUID;")
+                    if (entityProperties.any { it.type == "LocalDate" }) {
+                        writer.writeLine("import java.time.LocalDate;")
+                    }
+                    writer.writeLine("import javax.validation.constraints.NotNull;")
+                    writer.writeLine("import com.fasterxml.jackson.annotation.JsonFormat;")
+                    writer.writeLine("")
+                    writer.writeLine("import lombok.AllArgsConstructor;")
+                    writer.writeLine("import lombok.Getter;")
+                    writer.writeLine("import lombok.NoArgsConstructor;")
+                    writer.writeLine("import lombok.Setter;")
+                    writer.writeLine("import lombok.ToString;")
+                    writer.writeLine("import tz.go.mnrt.asert.modules.${packageName}.entity.${moduleName};")
+
+                    writer.writeLine("")
+                    writer.writeLine("@Getter")
+                    writer.writeLine("@Setter")
+                    writer.writeLine("@ToString")
+                    writer.writeLine("@AllArgsConstructor")
+                    writer.writeLine("@NoArgsConstructor")
+                    writer.writeLine("public class ${moduleName}ResponseDto {")
+
+                    writer.writeLine("  private Long id;")
+                    writer.writeLine("  private UUID uuid;")
+                    writer.writeLine("")
+                    writer.writeLine("  @NotNull(message = \"Created Date is required\")")
+                    writer.writeLine("  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = \"yyyy-MM-dd\")")
+                    writer.writeLine("  private LocalDateTime createdDate;")
+
+                    entityProperties.each { prop ->
+                        writer.writeLine("")
+                        if (prop.type == "ManyToOne") {
+                            writer.writeLine("  private Long ${prop.name}Id;")
+                        } else if (prop.type == "OneToMany") {
+                            writer.writeLine("  private List<Long> ${prop.name}Ids;")
+                        } else {
+                            writer.writeLine("  private ${prop.type} ${prop.name};")
+                        }
+                    }
+
+                    writer.writeLine("")
+                    writer.writeLine("  public ${moduleName}ResponseDto(${moduleName} entity) {")
+                    writer.writeLine("    entity.toDao(this);")
+                    writer.writeLine("  }")
+
+                    writer.writeLine("}")
+                }
+            } else if (dtoType == "Request") {
+                outputFile.withWriter { writer ->
+                    writer.writeLine("package tz.go.mnrt.asert.modules.${packageName}.dtos;")
+                    writer.writeLine("")
+                    writer.writeLine("import java.util.UUID;")
+                    if (entityProperties.any { it.type == "LocalDate" }) {
+                        writer.writeLine("import java.time.LocalDate;")
+                    }
+                    if (entityProperties.any { it.type == "LocalDateTime" }) {
+                        writer.writeLine("import java.time.LocalDateTime;")
+                    }
+                    writer.writeLine("import javax.validation.constraints.NotNull;")
+                    writer.writeLine("import javax.validation.constraints.Size;")
+                    writer.writeLine("")
+                    writer.writeLine("import lombok.AllArgsConstructor;")
+                    writer.writeLine("import lombok.Getter;")
+                    writer.writeLine("import lombok.NoArgsConstructor;")
+                    writer.writeLine("import lombok.Setter;")
+                    writer.writeLine("import lombok.ToString;")
+                    writer.writeLine("import tz.go.mnrt.asert.modules.${packageName}.entity.${moduleName};")
+
+                    writer.writeLine("")
+                    writer.writeLine("@Getter")
+                    writer.writeLine("@Setter")
+                    writer.writeLine("@ToString")
+                    writer.writeLine("@AllArgsConstructor")
+                    writer.writeLine("@NoArgsConstructor")
+                    writer.writeLine("public class ${moduleName}RequestDto {")
+
+                    writer.writeLine("  private Long id;")
+                    writer.writeLine("  private UUID uuid;")
+                    writer.writeLine("")
+
+                    entityProperties.each { prop ->
+                        if (prop.type == "ManyToOne") {
+                            if (prop.required) {
+                                writer.writeLine("  @NotNull(message = \"${prop.name}Id is required\")")
+                            }
+                            writer.writeLine("  private Long ${prop.name}Id;")
+                        } else if (prop.type != "OneToMany") {
+                            if (prop.required) {
+                                writer.writeLine("  @NotNull(message = \"${prop.name} is required\")")
+                            }
+                            if (prop.length) {
+                                writer.writeLine("  @Size(max = ${prop.length}, message = \"${prop.name} cannot exceed ${prop.length} characters\")")
+                            }
+                            writer.writeLine("  private ${prop.type} ${prop.name};")
+                        }
+                        writer.writeLine("")
+                    }
+
+                    writer.writeLine("  public ${moduleName}RequestDto(${moduleName} entity) {")
+                    writer.writeLine("    entity.toDao(this);")
+                    writer.writeLine("  }")
+
+                    writer.writeLine("}")
+                }
+            }
+        }
+
+        def genMigration = {
+            println "☢️  Generating Module ${moduleName} migration with properties"
+            File fileTemplate = new File("${rootDir}/tools/templates/migration.sql")
+            def timestamp = new Date().format('yyyyMMddHHmmssSSS', TimeZone.getTimeZone('GMT'))
+            def fullFileName = "${timestamp}__create_${moduleTableName}_table.sql"
+            def migrationFile = new File(sourceSets.main.resources.srcDirs.first(), 'db/migration/' + fullFileName)
+
+            migrationFile.withWriter { writer ->
+                writer.writeLine("-- WHEN COMMITTING OR REVIEWING THIS FILE: Make sure that the timestamp in the file name (that serves as a version) is the latest timestamp, and that no new migration have been added in the meanwhile.")
+                writer.writeLine("-- Adding migrations out of order may cause this migration to never execute or behave in an unexpected way.")
+                writer.writeLine("-- Migrations should NOT BE EDITED. Add a new migration to apply changes.")
+                writer.writeLine("-----DELETE ME TO APPLY THIS MIGRATION----")
+                writer.writeLine("___DELETE ME TO APPLY THIS MIGRATION___")
+                writer.writeLine("CREATE TABLE ${moduleTableName}")
+                writer.writeLine("(")
+                writer.writeLine("    id                 BIGINT GENERATED BY DEFAULT AS IDENTITY NOT NULL,")
+                writer.writeLine("    uuid               UUID                                    NOT NULL,")
+                writer.writeLine("    created_at         TIMESTAMP WITHOUT TIME ZONE,")
+                writer.writeLine("    created_by         VARCHAR(255),")
+                writer.writeLine("    updated_at         TIMESTAMP WITHOUT TIME ZONE,")
+                writer.writeLine("    updated_by         VARCHAR(255),")
+                writer.writeLine("    is_deleted         BOOLEAN,")
+
+                if (!entityProperties.isEmpty()) {
+                    entityProperties.each { prop ->
+                        if (prop.type == "ManyToOne") {
+                            def columnName = "${prop.name.replaceAll(/([a-z])([A-Z])/, '$1_$2').toLowerCase()}_id"
+                            def constraints = prop.required ? ["NOT NULL"] : []
+                            writer.writeLine("    ${columnName}".padRight(20) + "BIGINT".padRight(40) + "${constraints.join(' ')},")
+                        } else if (prop.type != "OneToMany") {
+                            def sqlType = getSqlType(prop.type)
+                            def constraints = []
+                            if (prop.required) constraints.add("NOT NULL")
+                            def fieldDefinition = "    ${prop.name.replaceAll(/([a-z])([A-Z])/, '$1_$2').toLowerCase()}".padRight(20) +
+                                                 "${sqlType}".padRight(40) + "${constraints.join(' ')}"
+                            writer.writeLine(fieldDefinition + ",")
+                        }
+                    }
+                } else {
+                    writer.writeLine("    -- ADD YOUR COLUMNS HERE")
+                    writer.writeLine("    -- ADD YOUR COLUMNS HERE")
+                }
+
+                writer.writeLine("    CONSTRAINT pk_${moduleTableName} PRIMARY KEY (id)")
+                writer.writeLine(");")
+                writer.writeLine("ALTER TABLE ${moduleTableName}")
+                writer.writeLine("    ADD CONSTRAINT uc_${moduleTableName}_uuid UNIQUE (uuid);")
+
+                entityProperties.findAll { it.unique && it.type != "ManyToOne" && it.type != "OneToMany" }.each { prop ->
+                    def columnName = prop.name.replaceAll(/([a-z])([A-Z])/, '$1_$2').toLowerCase()
+                    writer.writeLine("ALTER TABLE ${moduleTableName}")
+                    writer.writeLine("    ADD CONSTRAINT uc_${moduleTableName}_${columnName} UNIQUE (${columnName});")
+                }
+
+                entityProperties.findAll { it.type == "ManyToOne" }.each { prop ->
+                    def columnName = "${prop.name.replaceAll(/([a-z])([A-Z])/, '$1_$2').toLowerCase()}_id"
+                    def targetTableName = org.atteo.evo.inflector.English.plural(prop.targetEntity).replaceAll(/([a-z])([A-Z])/, '$1_$2').toLowerCase()
+                    writer.writeLine("ALTER TABLE ${moduleTableName}")
+                    writer.writeLine("    ADD CONSTRAINT fk_${moduleTableName}_${columnName} FOREIGN KEY (${columnName})")
+                    writer.writeLine("    REFERENCES ${targetTableName} (id);")
+                }
+            }
+            migrationFile.createNewFile()
+        }
+
+        genMigration()
+
+        if (!entityProperties.isEmpty()) {
+            genDtoWithProps("Request")
+            genDtoWithProps("Response")
+        } else {
+            genFile("RequestDtoTemplate", "dtos", "RequestDto")
+            genFile("ResponseDtoTemplate", "dtos", "ResponseDto")
+        }
+
+        genFile("EntityTemplate", "entity", "")
+        genFile("RepositoryTemplate", "repository", "Repository")
+        genFile("ResourceTemplate", "rest", "Resource")
+        genFile("ServiceTemplate", "services", "Service")
+        genFile("ServiceImplTemplate", "services", "ServiceImpl")
+
+        println "☢️  ${moduleName} Created with ${entityProperties.size()} properties ✅"
+    }
+}
+
+import groovy.io.FileType
+
+task rename {
+    description "Rename the main package and directories to the specified name. Usage: ./gradlew rename -Pn='new.package.name'"
+    doLast {
+        if (!project.hasProperty('n')) {
+            throw new GradleException("The property 'n' is required. Usage: ./gradlew rename -Pn='new.package.name'")
+        }
+
+        def newPackageName = project.property('n')
+        def newPackagePath = newPackageName.replace('.', '/')
+        def srcDir = file('src/main/java')
+        def toolsDir = file('tools/templates')
+        def currentGroup = project.group.toString()
+        def currentGroupPath = currentGroup.replace('.', '/')
+
+        def buildFile = file('build.gradle')
+        def buildText = buildFile.text
+        buildText = buildText.replaceFirst("group = '.*'", "group = '${newPackageName}'")
+        buildFile.text = buildText
+        println "Updated group to ${newPackageName} in build.gradle"
+
+        def updatePackagesAndImports = { directory ->
+            directory.eachFileRecurse(FileType.FILES) { file ->
+                if (file.name.endsWith('.java')) {
+                    def text = file.text
+                    text = text.replaceFirst("package ${currentGroup}(.*);", "package ${newPackageName}\$1;")
+                    text = text.replaceAll("import ${currentGroup}\\.", "import ${newPackageName}.")
+                    file.text = text
+                    println "Updated package and imports in ${file.path}"
+                }
+            }
+        }
+
+        updatePackagesAndImports(srcDir)
+        updatePackagesAndImports(toolsDir)
+
+        def renameDirectories = { directory, oldPath, newPath ->
+            def oldDir = new File(directory, oldPath)
+            println "Checking if old directory exists: ${oldDir.absolutePath}"
+            if (oldDir.exists()) {
+                def newDir = new File(directory, newPath)
+                def parentDir = newDir.getParentFile()
+                if (!parentDir.exists()) {
+                    println "Creating parent directory: ${parentDir.absolutePath}"
+                    parentDir.mkdirs()
+                }
+                println "Attempting to rename ${oldDir.absolutePath} to ${newDir.absolutePath}"
+                if (oldDir.renameTo(newDir)) {
+                    println "Successfully renamed directory ${oldDir} to ${newDir}"
+                } else {
+                    println "Failed to rename directory ${oldDir} to ${newDir}"
+                }
+            } else {
+                println "Old directory ${oldDir.absolutePath} does not exist"
+            }
+        }
+
+        renameDirectories(srcDir, currentGroupPath, newPackagePath)
+        renameDirectories(toolsDir, currentGroupPath, newPackagePath)
+
+        println "Renamed package and updated imports successfully."
+    }
+}

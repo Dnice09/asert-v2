@@ -1,0 +1,68 @@
+# npm i -g nyatictl
+# nyatictl --conf nyati.yaml --exec
+#
+
+version: 0.1.0
+appname: zanhfr-api
+dir: '/var/www/html/'
+params:
+hosts:
+  test:
+    host: '#env:TEST_HOST'
+    username: '#env:TEST_USERNAME'
+    port: 22
+    envpath: '.'
+    privateKey: '#env:TEST_PRIVATE_KEY'
+    passphrase: '#env?:TEST_PASSPHRASE'
+    password: ''
+tasks:
+  - name: clean
+    message: older deployments cleaned
+    cmd: ls -dt1 */ | tail -n +4 | xargs rm -rf
+    dir: /var/www/html/${appname}/releases
+    debug: 1
+    expect: 0
+    output: 1
+    lib: 1
+  - name: stop
+    cmd: sudo systemctl stop zanhfr.service
+    expect: 0
+    message: Service stopped
+    output: 1
+    lib: 1
+  - name: start
+    cmd: sudo systemctl stop zanhfr.service
+    expect: 0
+    message: Service started
+    output: 1
+    lib: 2
+  - name: restart
+    cmd: sudo systemctl restart zanhfr.service
+    expect: 0
+    message: Service restarted
+    output: 1
+    lib: 1
+
+  - name: new_release
+    cmd: mkdir -p /var/www/html/${appname}/releases/${release_version}
+    expect: 0
+  - name: git_clone
+    cmd: git clone --depth=1 -b develop git@github.com:watabelabs/zanhfr-api.git /var/www/html/${appname}/releases/${release_version}
+    expect: 0
+  - name: prepare
+    cmd: gradle wrapper
+    dir: /var/www/html/${appname}/releases/${release_version}
+    expect: 0
+  - name: build
+    cmd: ./gradlew bootJar
+    dir: /var/www/html/${appname}/releases/${release_version}
+    expect: 0
+  - name: link
+    cmd: ln -sfn /var/www/html/${appname}/releases/${release_version} /var/www/html/${appname}/current
+    expect: 0
+    message: Deployment completed ${release_version}
+  - name: deploment_completed
+    cmd: sudo systemctl restart zanhfr.service
+    expect: 0
+    message: Deployment completed ${release_version}
+

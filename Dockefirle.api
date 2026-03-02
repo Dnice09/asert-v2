@@ -1,0 +1,40 @@
+# FROM openjdk:11-jre-
+FROM openjdk:26-ea-jdk-slim
+
+# Install required libraries for JasperReports PDF generation
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    fontconfig \
+    libfreetype6 \
+    fonts-dejavu-core \
+    fonts-dejavu-extra \
+    fonts-liberation \
+    fonts-liberation2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Working directory in the container
+WORKDIR /app
+
+# Copy JAR file and the wait-for-it.sh script to the container
+COPY asert-api/build/libs/api-0.0.1-SNAPSHOT.jar app.jar
+COPY config/wait-for-it.sh /app/wait-for-it.sh
+
+# Copy GePG PFX keys to the container
+COPY config/keys/ /app/asert-gepg-keys/
+
+# Copy the config files to a temporary location
+COPY config/.env /app/.env
+COPY config/application.yaml /app/application.yaml
+COPY config/application-dev.yaml /app/application-dev.yaml
+COPY config/application-prod.yaml /app/application-prod.yaml
+COPY config/github.properties /app/github.properties
+COPY asert-api/src/main/resources/jasper-templates/reports /app/asert-jasper-reports
+
+# Make sure wait-for-it.sh has execution permissions
+RUN chmod +x /app/wait-for-it.sh
+
+# Expose the application port
+EXPOSE 8080
+
+# Run the JAR file using the wait-for-it.sh script
+ENTRYPOINT ["./wait-for-it.sh", "asert-rabbitmq:5672", "--", "java", "-jar", "app.jar"]

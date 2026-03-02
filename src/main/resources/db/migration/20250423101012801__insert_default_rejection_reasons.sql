@@ -1,0 +1,28 @@
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+INSERT INTO assessor_rejection_reasons (code, reason, uuid, created_at, updated_at, is_deleted)
+VALUES ('INCOMPLETE_PROFILE', 'The assessor profile is incomplete.', gen_random_uuid(), now(), now(), false),
+       ('MISSING_DOCUMENTS', 'Required supporting documents were not uploaded.', gen_random_uuid(), now(), now(),
+        false),
+       ('INVALID_IDENTIFICATION', 'The identification provided is invalid or unverifiable.', gen_random_uuid(), now(),
+        now(), false),
+       ('INSUFFICIENT_EXPERIENCE', 'The assessor does not meet the required experience.', gen_random_uuid(), now(),
+        now(), false),
+       ('FAKE_CREDENTIALS', 'Submitted credentials appear to be forged or unverified.', gen_random_uuid(), now(), now(),
+        false),
+       ('NOT_RELATED_TO_INDUSTRY', 'Background is not relevant to tourism and hospitality industry.', gen_random_uuid(),
+        now(), now(), false),
+       ('BLACKLISTED', 'Assessor is blacklisted from previous misconduct or issues.', gen_random_uuid(), now(), now(),
+        false),
+       ('UNRESPONSIVE', 'Assessor failed to respond to communication or follow-up.', gen_random_uuid(), now(), now(),
+        false),
+       ('MULTIPLE_APPLICATIONS', 'Duplicate applications detected from the same individual.', gen_random_uuid(), now(),
+        now(), false),
+       ('INCOMPLETE_EDUCATION', 'Education qualifications do not meet minimum requirements.', gen_random_uuid(), now(),
+        now(), false),
+       ('INVALID_CONTACT', 'Phone or email provided is unreachable or incorrect.', gen_random_uuid(), now(), now(),
+        false),
+       ('INCONSISTENT_INFORMATION', 'Inconsistent details provided in application.', gen_random_uuid(), now(), now(),
+        false),
+       ('NOT_APPROVED_BY_VERIFIER', 'Verification officer did not approve the application.', gen_random_uuid(), now(),
+        now(), false);

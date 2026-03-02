@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="facility-certificate"
+              pageWidth="595"
+              pageHeight="842"
+              columnWidth="555"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="20"
+              bottomMargin="20"
+              whenNoDataType="AllSectionsNoDetail"
+              uuid="f3f969f5-b4cd-48ee-bd90-8c8b45138fd5">
+
+    <parameter name="eacLogo" class="java.lang.String"/>
+    <parameter name="coatOfArms" class="java.lang.String"/>
+    <parameter name="facilityName" class="java.lang.String"/>
+    <parameter name="grade" class="java.lang.String"/>
+    <parameter name="issueDate" class="java.util.Date"/>
+    <parameter name="registrationNumber" class="java.lang.String"/>
+
+    <background>
+        <band height="400" splitType="Stretch">
+            <textField isStretchWithOverflow="true">
+                <reportElement mode="Transparent" x="0" y="0" width="555" height="400" forecolor="#F0F0F0" uuid="8a6d2c4e-6b8a-4c9e-9d3f-5b6c7d8e9f0a"/>
+                <textElement>
+                    <font size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA[new String(new char[50]).replace("\0", "East African Community East African Community ")]]></textFieldExpression>
+            </textField>
+        </band>
+    </background>
+
+    <title>
+        <band height="650" splitType="Stretch">
+             <image hAlign="Left" vAlign="Top">
+                 <reportElement x="0" y="10" width="90" height="90" uuid="d1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d"/>
+                 <imageExpression><![CDATA[$P{eacLogo}]]></imageExpression>
+             </image>
+
+             <image hAlign="Right" vAlign="Top">
+                 <reportElement x="465" y="10" width="90" height="90" uuid="a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5e"/>
+                 <imageExpression><![CDATA[$P{coatOfArms}]]></imageExpression>
+             </image>
+
+            <staticText>
+                <reportElement x="100" y="30" width="355" height="30" uuid="b1c2d3e4-f5a6-4b7c-8d9e-0f1a2b3c4d5e"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[MINISTRY OF NATURAL RESOURCES AND TOURISM]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="0" y="140" width="555" height="45" uuid="c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Serif" size="30" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Certificate of Classification]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="0" y="220" width="555" height="25" uuid="d1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a"/>
+                <textElement textAlignment="Center" verticalAlignment="Bottom">
+                    <font size="16" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[This is to certify that]]></text>
+            </staticText>
+
+            <textField isStretchWithOverflow="true">
+                <reportElement x="0" y="255" width="555" height="60" forecolor="#003399" uuid="e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Serif" size="34" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{facilityName}.toUpperCase()]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="0" y="325" width="555" height="25" uuid="f1a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b5c"/>
+                <textElement textAlignment="Center" verticalAlignment="Top">
+                    <font size="16" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Has been classified as]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="0" y="360" width="555" height="40" uuid="a2b3c4d5-e6f7-4a8b-9c0d-1e2f3a4b5c6d"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="24" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{grade}.toUpperCase() + " STAR"]]></textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="0" y="405" width="555" height="50" forecolor="#FFCC00" uuid="b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e"/>
+                <textElement textAlignment="Center" verticalAlignment="Top">
+                    <font size="36"/>
+                </textElement>
+                <text><![CDATA[★★★★]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <pageFooter>
+        <band height="140" splitType="Stretch">
+            <textField>
+                <reportElement x="40" y="20" width="240" height="20" uuid="c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Serial No: " + $P{registrationNumber}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="dd MMMMM yyyy">
+                <reportElement x="40" y="45" width="240" height="20" uuid="d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="11" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Date: " + $P{issueDate}]]></textFieldExpression>
+            </textField>
+
+            <line>
+                <reportElement x="340" y="70" width="180" height="1" uuid="8e5f6a7b-8c9d-4e1f-a2b3-b4c5d6e7f8a9"/>
+            </line>
+            <staticText>
+                <reportElement x="340" y="75" width="180" height="45" uuid="f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c"/>
+                <textElement textAlignment="Center">
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Permanent Secretary
+Issuing Authority]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+</jasperReport>
