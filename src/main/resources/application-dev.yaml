@@ -1,6 +1,89 @@
 logging:
-    level:
-        root: INFO
-        tz.go.mnrt.asert: DEBUG
-    file:
-        name: logs/application.log
+    pattern:
+        console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(%5p){blue} %clr(%logger{36}){cyan} - %clr(%msg){yellow}%n"
+        file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    color:
+        highlight:
+            fatal: red
+            error: red
+            warn: yellow
+            info: green
+            debug: blue
+            trace: magenta
+spring:
+    mail:
+        host: smtp.hotmail.com
+        protocol: smtp
+        port: 587
+        username: email@my-domain.com
+        password: my-secret-password
+        properties:
+            mail:
+                setTls: true
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+    main:
+        allow-circular-references: true
+    jpa:
+        generate-ddl: true
+        hibernate:
+            ddl-auto: validate
+        show-sql: false
+        properties:
+            hibernate:
+                format_sql: true
+    devtools:
+        restart:
+            enabled: true
+            poll-interval: 2s
+            strategy: reload
+            additional-exclude: static/**
+    jackson:
+        serialization:
+            indent-output: true
+    flyway:
+        sql-migration-prefix:
+        table: migrations
+        validate-on-migrate: false
+        out-of-order: true
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:postgresql://localhost/asert
+        username: postgres
+        password: frank
+        hikari:
+            poolName: Hikari
+            auto-commit: false
+    jasper-reports:
+        output-directory: /Users/apple/Documents/Projects/uploads
+        compiled-templates-directory: /Users/apple/Documents/Projects/uploads
+    security:
+        token-signing-key: "1233"
+        token-validity-time: 360 #Seconds
+    rabbitmq:
+        queue:
+            apikey-published-queue: APIKEY_PUBLISHED
+            apikey-failed-queue: APIKEY_FAILED
+            facility-codes-bulk-published-queue: FACILITY_CODES_BULK_PUBLISHED
+asert:
+    uploaded-files:
+        url: /Users/apple/Documents/Projects/uploads
+    default-password: 'Asert2@25'
+    jasper-reports:
+        output-directory: /Users/apple/Documents/Projects/uploads
+        compiled-templates-directory: /Users/apple/Documents/Projects/uploads
+    security:
+        token-signing-key: "1233"
+        token-validity-time: 3600 #Seconds
+        refresh-token-validity-time: 36000
+environment: "dev"
+
+email:
+    sender-email: your-emal@mail.com
+
+server:
+    servlet:
+        timeout: 120000 # 2 minutes
+    port: 9090
