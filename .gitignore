@@ -1,6 +1,5 @@
 src/ignore.md
 src/main/resources/application.properties
-src/main/resources/application.yaml
 storage
 build
 bin
